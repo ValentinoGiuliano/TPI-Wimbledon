@@ -28,4 +28,11 @@ const Inscripcion = sequelize.define("inscripciones", {
   timestamps: false // Desactiva los timestamps automáticos
 });
 
+// Definir asociaciones
+Jugador.hasMany(Inscripcion, { foreignKey: 'IdJugador' });
+Inscripcion.belongsTo(Jugador, { foreignKey: 'IdJugador' });
+
+Torneo.hasMany(Inscripcion, { foreignKey: 'IdTorneo' });
+Inscripcion.belongsTo(Torneo, { foreignKey: 'IdTorneo' });
+
 module.exports = { sequelize, Jugador, Torneo, Inscripcion };

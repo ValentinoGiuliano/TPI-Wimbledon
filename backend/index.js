@@ -7,6 +7,7 @@ const authenticateJWT = require('./seguridad/auth');
 const app = express();
 app.use(express.json());
 app.use(cors({ origin: '*' }));
+app.use(express.urlencoded({ extended: true }));
 
 // Inicializar la base de datos si no existe
 require('./base-orm/sqlite-init');
@@ -19,7 +20,8 @@ const inscripcionesRouter = require('./routes/inscripciones');
 
 // Configurar las rutas
 app.use('/api/jugadores', jugadoresRouter); // Sin autenticación
-app.use('/api/torneos', authenticateJWT, torneosRouter); // Con autenticación
+app.use('/api/torneos', torneosRouter); // Con autenticación
+app.use('/api/inscripciones', inscripcionesRouter)
 app.use(seguridadRouter); // Rutas de seguridad (login)
 
 // Ruta principal para verificar funcionamiento
@@ -33,10 +35,13 @@ app.get("/_isalive", (req, res) => {
 });
 
 if (!module.parent) {
-  const port = process.env.PORT || 3000;
-  app.locals.fechaInicio = new Date();
-  app.listen(port, () => {
-    console.log(`sitio escuchando en el puerto ${port}`);
+  sequelize.sync().then(() => {
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => {
+      console.log('Servidor escuchando en http://localhost:3000');
+    });
+  }).catch(error => {
+    console.error('No se pudo conectar a la base de datos:', error);
   });
 }
 

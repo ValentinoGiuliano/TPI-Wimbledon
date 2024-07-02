@@ -16,13 +16,13 @@ function Inscripciones({ token }) {
           axios.get('http://localhost:3000/api/inscripciones', {
             headers: { Authorization: `Bearer ${token}` }
           }),
-          axios.get('http://localhost:3000/api/jugadores'),
+          axios.get('http://localhost:3000/api/jugadores', {
+            headers: { Authorization: `Bearer ${token}` }
+          }),
           axios.get('http://localhost:3000/api/torneos', {
             headers: { Authorization: `Bearer ${token}` }
           })
         ]);
-        console.log("Jugadores: ", jugadoresRes.data); // Añade esto para depurar
-        console.log("Torneos: ", torneosRes.data); // Añade esto para depurar
         setInscripciones(inscripcionesRes.data);
         setJugadores(jugadoresRes.data);
         setTorneos(torneosRes.data);
@@ -56,7 +56,7 @@ function Inscripciones({ token }) {
       setEditId(null);
       fetchInscripciones(); // Actualizar lista de inscripciones
     } catch (error) {
-      console.error('Hubo un error!', error);
+      console.error('Hubo un error!', error.response ? error.response.data : error);
     }
   };
 
@@ -82,6 +82,16 @@ function Inscripciones({ token }) {
       headers: { Authorization: `Bearer ${token}` }
     });
     setInscripciones(response.data);
+  };
+
+  const getNombreJugador = (id) => {
+    const jugador = jugadores.find((j) => j.IdJugador === id);
+    return jugador ? jugador.Nombre : 'Cargando...';
+  };
+
+  const getNombreTorneo = (id) => {
+    const torneo = torneos.find((t) => t.IdTorneo === id);
+    return torneo ? torneo.Nombre : 'Cargando...';
   };
 
   return (
@@ -134,8 +144,8 @@ function Inscripciones({ token }) {
         <tbody>
           {inscripciones.map((inscripcion) => (
             <tr key={inscripcion.IdInscripcion}>
-              <td>{inscripcion.Jugador.Nombre}</td>
-              <td>{inscripcion.Torneo.Nombre}</td>
+              <td>{getNombreJugador(inscripcion.IdJugador)}</td>
+              <td>{getNombreTorneo(inscripcion.IdTorneo)}</td>
               <td>
                 <button className="btn btn-warning btn-sm me-2" onClick={() => handleEdit(inscripcion)}>Editar</button>
                 <button className="btn btn-danger btn-sm" onClick={() => handleDelete(inscripcion.IdInscripcion)}>Eliminar</button>
