@@ -1,13 +1,15 @@
 // seguridad/auth.js
 const jwt = require('jsonwebtoken');
 
+const secret = 'youraccesstokensecret';
+
 const authenticateJWT = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (authHeader) {
     const token = authHeader.split(' ')[1];
 
-    jwt.verify(token, 'youraccesstokensecret', (err, user) => {
+    jwt.verify(token, secret, (err, user) => {
       if (err) {
         return res.sendStatus(403);
       }
@@ -20,4 +22,7 @@ const authenticateJWT = (req, res, next) => {
   }
 };
 
-module.exports =  authenticateJWT ;
+module.exports = {
+  authenticateJWT,
+  secret
+};
