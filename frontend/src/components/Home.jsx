@@ -14,7 +14,7 @@ function Home() {
         </div>
         <div className="carousel-inner" style={{ maxHeight: '500px' }}>
           <div className="carousel-item active">
-            <img src="/image1.webp" className="d-block w-100" alt="Federer" style={{ height: '500px', objectFit: 'cover', objectPosition: 'top' }} />
+            <img src="/image1.webp" className="d-block w-100" alt="Federer 1" style={{ height: '500px', objectFit: 'cover', objectPosition: 'top' }} />
           </div>
           <div className="carousel-item">
             <img src="/image2.jpg" className="d-block w-100" alt="Nadal" style={{ height: '500px', objectFit: 'cover', objectPosition: 'top' }} />
