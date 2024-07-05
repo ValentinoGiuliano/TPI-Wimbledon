@@ -14,13 +14,13 @@ function Home() {
         </div>
         <div className="carousel-inner" style={{ maxHeight: '500px' }}>
           <div className="carousel-item active">
-            <img src="public/image1.webp" className="d-block w-100" alt="Federer" style={{ height: '500px', objectFit: 'cover', objectPosition: 'top' }} />
+            <img src="frontend/public/image1.webp" className="d-block w-100" alt="Federer" style={{ height: '500px', objectFit: 'cover', objectPosition: 'top' }} />
           </div>
           <div className="carousel-item">
-            <img src="public/image2.jpg" className="d-block w-100" alt="Nadal" style={{ height: '500px', objectFit: 'cover', objectPosition: 'top' }} />
+            <img src="frontend/public/image2.jpg" className="d-block w-100" alt="Nadal" style={{ height: '500px', objectFit: 'cover', objectPosition: 'top' }} />
           </div>
           <div className="carousel-item">
-            <img src="public/image3.jpg" className="d-block w-100" alt="Jugadora Femenina" style={{ height: '500px', objectFit: 'cover', objectPosition: 'top' }} />
+            <img src="frontend/public/image3.jpg" className="d-block w-100" alt="Jugadora Femenina" style={{ height: '500px', objectFit: 'cover', objectPosition: 'top' }} />
           </div>
         </div>
         <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
